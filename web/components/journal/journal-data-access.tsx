@@ -12,7 +12,7 @@ import { useMemo } from "react";
 import JOURNAL_IDL from "../../solana_program/idl.json";
 
 // 저널 프로그램의 고유 ID (솔라나 블록체인에 배포된 프로그램 주소)
-const JOURNAL_PROGRAM_ID = new PublicKey("EPVoWozZeFBbB3czH6iR17i9J2TF78AtdEW8eo4PiEaw");
+const JOURNAL_PROGRAM_ID = new PublicKey("Fav3sb9GSR8hajEWQsnN2WCkvsEcNt4G3NESQnec6qX4");
 
 // 저널 엔트리 생성/수정 시 필요한 인자들의 타입 정의
 interface CreateEntryArgs {
@@ -25,7 +25,7 @@ interface CreateEntryArgs {
  * 저널 프로그램과의 전반적인 상호작용을 관리하는 메인 훅
  * 프로그램 인스턴스 생성, 계정 조회, 엔트리 생성 기능 제공
  */
-export function useJournalProgram() {
+export function useJournalProgram() { // createJournalProgram -> account를 새로 만들어야하므로 이는 program이 해야함
   // 솔라나 RPC 연결 객체
   const { connection } = useConnection();
   // 현재 연결된 클러스터 정보 (devnet, testnet, mainnet)
@@ -36,6 +36,9 @@ export function useJournalProgram() {
   const provider = useAnchorProvider();
   
   // 프로그램 ID
+  // useMemo 
+  // 첫 번째 인자: 계산할 값을 반환하는 함수
+  // 두 번째 인자: 의존성 배열 (이 값들이 변경될 때만 재계산)
   const programId = useMemo(
     () => JOURNAL_PROGRAM_ID,
     []
@@ -86,7 +89,7 @@ export function useJournalProgram() {
       );
 
       // 솔라나 프로그램의 createJournalEntry 메서드 호출
-      return program.methods.createJournalEntry(title, message).rpc();
+      return program.methods.createJournalEntry(title, message).rpc(); // 솔라나 프로그램의 함수 실행!!
     },
     onSuccess: (signature) => {
       // 성공 시 트랜잭션 서명을 토스트로 표시
@@ -150,7 +153,7 @@ export function useJournalProgramAccount({ account }: { account: PublicKey }) {
       );
 
       // 솔라나 프로그램의 updateJournalEntry 메서드 호출
-      return program.methods.updateJournalEntry(title, message).rpc();
+      return program.methods.updateJournalEntry(title, message).rpc(); // 솔라나 프로그램의 함수 실행!!
     },
     onSuccess: (signature) => {
       // 성공 시 트랜잭션 서명 토스트 표시
@@ -170,7 +173,7 @@ export function useJournalProgramAccount({ account }: { account: PublicKey }) {
     mutationFn: (title: string) => {
       if (!program) throw new Error("Program not initialized");
       // 솔라나 프로그램의 deleteJournalEntry 메서드 호출
-      return program.methods.deleteJournalEntry(title).rpc();
+      return program.methods.deleteJournalEntry(title).rpc(); // 솔라나 프로그램의 함수 실행!!
     },
     onSuccess: (tx) => {
       // 성공 시 트랜잭션 토스트 표시

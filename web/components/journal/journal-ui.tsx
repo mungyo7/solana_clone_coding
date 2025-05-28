@@ -33,7 +33,7 @@ export function JournalCreate() {
     return <p>Connect your wallet</p>;
   }
 
-  // 입력 폼 렌더링
+  // 입력 폼 렌더링 => createJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
   return (
     <div>
       <input
@@ -118,7 +118,7 @@ function JournalCard({ account }: { account: PublicKey }) {
   // 폼 유효성 검사
   const isFormValid = message.trim() !== "";
 
-  // 수정 핸들러
+  // 수정 핸들러 => updateJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
   const handleSubmit = () => {
     if (publicKey && isFormValid && title) {
       updateEntry.mutateAsync({ title, message, owner: publicKey });
@@ -142,9 +142,10 @@ function JournalCard({ account }: { account: PublicKey }) {
             className="card-title justify-center text-3xl cursor-pointer"
             onClick={() => accountQuery.refetch()}
           >
+            {/* 제목 표시@@@@@@@@@@@@@@@@@@@@@ */}
             {accountQuery.data?.title}
           </h2>
-          {/* 메시지 표시 */}
+          {/* 메시지 표시@@@@@@@@@@@@@@@@@@@@@ */}
           <p>{accountQuery.data?.message}</p>
           <div className="card-actions justify-around">
             {/* 메시지 수정 입력란 */}
@@ -156,7 +157,7 @@ function JournalCard({ account }: { account: PublicKey }) {
             />
             <button
               className="btn btn-xs lg:btn-md btn-primary"
-              onClick={handleSubmit}
+              onClick={handleSubmit} //  updateJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
               disabled={updateEntry.isPending || !isFormValid}
             >
               Update Journal Entry {updateEntry.isPending && "..."}
@@ -183,7 +184,7 @@ function JournalCard({ account }: { account: PublicKey }) {
                 }
                 const title = accountQuery.data?.title;
                 if (title) {
-                  return deleteEntry.mutateAsync(title);
+                  return deleteEntry.mutateAsync(title); // deleteJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
                 }
               }}
               disabled={deleteEntry.isPending}
