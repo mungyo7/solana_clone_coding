@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 // This is your program's public key and it will update
 // automatically when you build the project.
-declare_id!("2taQ6Nk3APCF7XMZ5QfguyhA1V4acthBSm9kkRpfaSyv");
+declare_id!("Fav3sb9GSR8hajEWQsnN2WCkvsEcNt4G3NESQnec6qX4");
 
 #[program]
 mod journal {
@@ -60,11 +60,13 @@ pub struct CreateEntry<'info> {
         seeds = [title.as_bytes(), owner.key().as_ref()], 
         bump, 
         payer = owner, 
-        space = 8 + 32 + 4 + title.len() + 4 + message.len()
+        space = 8 + 32 + 4 + title.len() + 4 + message.len() // 기본 8 + 지갑주소 pubkey 32 + 글자길이정보 4 + title 길이 + 글자길이정보 4 + message 길이
     )]
     pub journal_entry: Account<'info, JournalEntryState>,
+
     #[account(mut)]
     pub owner: Signer<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
@@ -80,8 +82,10 @@ pub struct UpdateEntry<'info> {
         realloc::zero = true, 
     )]
     pub journal_entry: Account<'info, JournalEntryState>,
+
     #[account(mut)]
     pub owner: Signer<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
@@ -95,7 +99,9 @@ pub struct DeleteEntry<'info> {
         close= owner,
     )]
     pub journal_entry: Account<'info, JournalEntryState>,
+
     #[account(mut)]
     pub owner: Signer<'info>,
+
     pub system_program: Program<'info, System>,
 }
