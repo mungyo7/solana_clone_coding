@@ -33,10 +33,13 @@ mod journal {
 pub struct JournalEntryState {}
 
 #[derive(Accounts)]
+#[instruction(title: String, message: String)]
 pub struct CreateEntry<'info> {}
 
 #[derive(Accounts)]
+#[instruction(title: String, message: String)]
 pub struct UpdateEntry<'info> {}
 
 #[derive(Accounts)]
+#[instruction(title: String)]
 pub struct DeleteEntry<'info> {}
