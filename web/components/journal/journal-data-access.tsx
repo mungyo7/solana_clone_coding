@@ -12,7 +12,7 @@ import { useMemo } from "react";
 import JOURNAL_IDL from "../../solana_program/idl.json";
 
 // 저널 프로그램의 고유 ID (솔라나 블록체인에 배포된 프로그램 주소)
-const JOURNAL_PROGRAM_ID = new PublicKey("EPVoWozZeFBbB3czH6iR17i9J2TF78AtdEW8eo4PiEaw");
+const JOURNAL_PROGRAM_ID = new PublicKey("55yAF94YAnwsSbNSdV9u8UrprNhweyJ52E68t1hX3ZF9");
 
 // 저널 엔트리 생성/수정 시 필요한 인자들의 타입 정의
 interface CreateEntryArgs {

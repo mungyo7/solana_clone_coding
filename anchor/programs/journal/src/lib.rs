@@ -4,6 +4,7 @@ use anchor_lang::prelude::*;
 // automatically when you build the project.
 declare_id!("Fav3sb9GSR8hajEWQsnN2WCkvsEcNt4G3NESQnec6qX4");
 
+// Program Account -> 코드
 #[program]
 mod journal {
     use super::*;
@@ -45,6 +46,7 @@ mod journal {
     }
 }
 
+// Account 구조(붕어빵 틀)
 #[account]
 pub struct JournalEntryState {
     pub owner: Pubkey,
@@ -52,6 +54,7 @@ pub struct JournalEntryState {
     pub message: String,
 }
 
+// Account 사용 설명서
 #[derive(Accounts)]
 #[instruction(title: String, message: String)]
 pub struct CreateEntry<'info> {
