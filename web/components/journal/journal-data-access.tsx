@@ -60,7 +60,7 @@ export function useJournalProgram() { // createJournalProgram -> account를 새�
     queryFn: async () => {
       if (!program) return [];
       try {
-        // 프로그램의 모든 journalEntryState 계정들을 가져옴
+        // 프로그램의 모든 journalEntryState 계정들을 가져옴 -> 모든 게시글 조회@@
         return await (program.account as any).journalEntryState.all();
       } catch (error) {
         console.log("No accounts found or program not deployed:", error);

@@ -151,7 +151,7 @@ function JournalCard({ account }: { account: PublicKey }) {
               onChange={(e) => setMessage(e.target.value)}
               className="textarea glass-effect w-full max-w-xs darker-text dark-placeholder focus:border-primary"
             />
-            <button
+            <button //updateJournalEntry 버튼@@@@@@@@@@@@@@@@@@@@@
               className={`btn btn-primary darker-text btn-shadow ${isFormValid ? 'btn-active-style' : 'glass'}`}
               onClick={handleSubmit}
               disabled={updateEntry.isPending || !isFormValid}
