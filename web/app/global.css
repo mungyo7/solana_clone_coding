@@ -5,6 +5,127 @@
 html,
 body {
   height: 100%;
+  background: linear-gradient(135deg, #8BB0FF 0%, #DCE0FD 50%, #F0F2FF 100%);
+  min-height: 100vh;
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 배경 이미지 컨테이너 */
+.background-images {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 1.png - 블룸 효과 */
+@keyframes bloom {
+  0%, 100% {
+    filter: saturate(100%) brightness(1);
+    transform: translateY(-60%) translateX(0) scale(1);
+  }
+  50% {
+    filter: saturate(120%) brightness(1.1);
+    transform: translateY(-60%) translateX(5px) scale(1.05);
+  }
+}
+
+/* 2.png - 크기만 변하는 효과 */
+@keyframes simpleScale {
+  0%, 100% {
+    transform: translateY(-20%) scale(1);
+  }
+  50% {
+    transform: translateY(-20%) scale(1.1, 1.05);
+  }
+}
+
+/* 3.png - 숨쉬는 효과 */
+@keyframes breathing {
+  0%, 100% {
+    transform: translateX(5px) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: translateX(5px) scale(1.03);
+    filter: brightness(1.1);
+  }
+}
+
+/* 왼쪽 상단 이미지 */
+.bg-image-1 {
+  position: absolute;
+  left: -5px;
+  top: 60%;
+  width: 210px;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  transform-origin: left center;
+  animation: bloom 6s ease-in-out infinite;
+}
+
+/* 오른쪽 상단 이미지 */
+.bg-image-2 {
+  position: absolute;
+  right: 0;
+  top: 20%;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  transform-origin: right;
+  animation: simpleScale 7s ease-in-out infinite;
+}
+
+/* 오른쪽 하단 이미지 */
+.bg-image-3 {
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  transform-origin: bottom right;
+  animation: breathing 5s ease-in-out infinite;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 버튼 그림자 효과 */
+.btn-shadow {
+  box-shadow: 0 0 15px rgba(74, 85, 104, 0.4);
+}
+
+/* 버튼 활성화 상태의 스타일 */
+.btn-active-style {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark-text {
+  color: #2D3748;
+}
+
+/* 더 진한 텍스트 색상 */
+.darker-text {
+  color: #1A202C;
+}
+
+/* placeholder 텍스트 색상 */
+.dark-placeholder::placeholder {
+  color: #4A5568;
+  opacity: 1;
 }
 
 .wallet-adapter-button-trigger {
@@ -16,4 +137,22 @@ body {
 .wallet-adapter-dropdown-list,
 .wallet-adapter-button {
   font-family: inherit !important;
+}
+
+/* 클러스터 테이블 스타일 */
+.table {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(5px);
+}
+
+.table thead tr {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.table tbody tr.bg-base-200\/50 {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.8) !important;
 }

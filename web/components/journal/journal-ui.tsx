@@ -21,7 +21,7 @@ export function JournalCreate() {
 
   const isFormValid = title.trim() !== "" && message.trim() !== "";
 
-  // 제출 핸들러
+  // 제출 핸들러 CreateEntry@@@@@@@@@@
   const handleSubmit = () => {
     if (publicKey && isFormValid) {
       createEntry.mutateAsync({ title, message, owner: publicKey });
@@ -33,25 +33,25 @@ export function JournalCreate() {
     return <p>Connect your wallet</p>;
   }
 
-  // 입력 폼 렌더링 => createJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
+  // 입력 폼 렌더링
   return (
-    <div>
+    <div className="darker-text">
       <input
         type="text"
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="input input-bordered w-full max-w-xs"
+        className="input glass-effect w-full max-w-xs darker-text dark-placeholder"
       />
       <textarea
         placeholder="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        className="textarea textarea-bordered w-full max-w-xs"
+        className="textarea glass-effect w-full max-w-xs darker-text dark-placeholder"
       />
       <br></br>
       <button
-        className="btn btn-xs lg:btn-md btn-primary"
+        className={`btn btn-primary darker-text btn-shadow ${isFormValid ? 'btn-active-style' : 'glass'}`}
         onClick={handleSubmit}
         disabled={createEntry.isPending || !isFormValid}
       >
@@ -134,46 +134,41 @@ function JournalCard({ account }: { account: PublicKey }) {
   return accountQuery.isLoading ? (
     <span className="loading loading-spinner loading-lg"></span>
   ) : (
-    <div className="card card-bordered border-base-300 border-4 text-neutral-content">
+    <div className="card glass-effect shadow-lg">
       <div className="card-body items-center text-center">
-        <div className="space-y-6">
-          {/* 제목 클릭 시 새로고침 */}
+        <div className="space-y-6 darker-text">
           <h2
             className="card-title justify-center text-3xl cursor-pointer"
             onClick={() => accountQuery.refetch()}
           >
-            {/* 제목 표시@@@@@@@@@@@@@@@@@@@@@ */}
             {accountQuery.data?.title}
           </h2>
-          {/* 메시지 표시@@@@@@@@@@@@@@@@@@@@@ */}
-          <p>{accountQuery.data?.message}</p>
+          <p className="text-lg">{accountQuery.data?.message}</p>
           <div className="card-actions justify-around">
-            {/* 메시지 수정 입력란 */}
             <textarea
               placeholder="Update message here"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="textarea textarea-bordered w-full max-w-xs"
+              className="textarea glass-effect w-full max-w-xs darker-text dark-placeholder focus:border-primary"
             />
             <button
-              className="btn btn-xs lg:btn-md btn-primary"
-              onClick={handleSubmit} //  updateJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
+              className={`btn btn-primary darker-text btn-shadow ${isFormValid ? 'btn-active-style' : 'glass'}`}
+              onClick={handleSubmit}
               disabled={updateEntry.isPending || !isFormValid}
             >
               Update Journal Entry {updateEntry.isPending && "..."}
             </button>
           </div>
           <div className="text-center space-y-4">
-            {/* Solana Explorer 링크 */}
             <p>
               <ExplorerLink
                 path={`account/${account}`}
                 label={ellipsify(account.toString())}
+                className="darker-text"
               />
             </p>
-            {/* 계정 삭제(닫기) 버튼 */}
             <button
-              className="btn btn-xs btn-secondary btn-outline"
+              className="btn btn-xs btn-secondary glass darker-text font-semibold btn-shadow"
               onClick={() => {
                 if (
                   !window.confirm(
@@ -183,8 +178,8 @@ function JournalCard({ account }: { account: PublicKey }) {
                   return;
                 }
                 const title = accountQuery.data?.title;
-                if (title) {
-                  return deleteEntry.mutateAsync(title); // deleteJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
+                if (title) { // deleteJournalEntry 함수 실행@@@@@@@@@@@@@@@@@@@@@
+                  return deleteEntry.mutateAsync(title);
                 }
               }}
               disabled={deleteEntry.isPending}

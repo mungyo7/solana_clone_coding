@@ -152,16 +152,16 @@ export function ClusterUiTable() {
   const { clusters, setCluster, deleteCluster } = useCluster();
   return (
     <div className="overflow-x-auto">
-      <table className="table border-4 border-separate border-base-300">
+      <table className="table border-2 border-separate border-base-200 rounded-lg">
         <thead>
           <tr>
-            <th>Name/ Network / Endpoint</th>
-            <th className="text-center">Actions</th>
+            <th className="rounded-tl-lg">Name/ Network / Endpoint</th>
+            <th className="text-center rounded-tr-lg">Actions</th>
           </tr>
         </thead>
         <tbody>
           {clusters.map((item) => (
-            <tr key={item.name} className={item?.active ? 'bg-base-200' : ''}>
+            <tr key={item.name} className={item?.active ? 'bg-base-200/50' : ''}>
               <td className="space-y-2">
                 <div className="whitespace-nowrap space-x-2">
                   <span className="text-xl">

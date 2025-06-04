@@ -18,7 +18,8 @@ export default function DashboardFeature() {
     <div>
       <AppHero title="gm" subtitle="Say hi to your new Solana dApp." />
       <div className="max-w-xl mx-auto py-6 sm:px-6 lg:px-8 text-center">
-        <div className="space-y-2">
+        <div className="flex flex-col items-center space-y-2">
+          <div className="w-[60px] h-[1.5px] bg-black/50 my-4"></div>
           <p>Here are some helpful links to get you started.</p>
           {links.map((link, index) => (
             <div key={index}>

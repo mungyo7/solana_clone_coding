@@ -23,6 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <div className="background-images">
+          <img src="/1.png" alt="Background 1" className="bg-image-1" />
+          <img src="/2.png" alt="Background 2" className="bg-image-2" />
+          <img src="/3.png" alt="Background 3" className="bg-image-3" />
+        </div>
         <ReactQueryProvider>
           <ClusterProvider>
             <SolanaProvider>
